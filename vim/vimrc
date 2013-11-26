@@ -1,0 +1,80 @@
+"for safety (help guard against unexpected things)
+set nocompatible
+
+"for security and to guard against the unexpected
+set nomodeline
+
+"always use same colorscheme
+colorscheme vividchalk
+
+"show line numbers
+set number
+
+"opening a new file will simply hide the current buffer
+set hidden
+
+"should this be set all the time, or just with C/C++ files?
+set autoindent
+
+"replace each tab with four spaces
+"function! SetTabs()
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+"endfunction
+"call SetTabs()
+
+"for bash-like tab completion of filenames
+set wildmode=longest,list
+
+"some autocmd is overriding these...
+"autocmd Filetype python setlocal expandtab softtabstop=4 shiftwidth=4
+"autocmd BufNew,BufRead *.py :call SetTabs()
+
+"shows matching braces/parens
+set showmatch
+
+"stops creating those annoying swap files
+set noswapfile
+
+"so I don't have to explicitly turn off highlighting after a search
+set nohlsearch
+
+"pressing F2 toggles paste inserts
+set pastetoggle=<F2>
+
+"for easy reselection of the previous visual selection
+nmap <silent> <leader>v `<v`>
+
+"save and load view files (include manual code folds)
+"the automated code folding methods suck
+"problem: these view files save all sorts of other options
+"set foldmethod=manual
+"autocmd BufWinLeave *.* mkview
+"autocmd BufWinEnter *.* silent loadview 
+"use setlocal in ftplugin files!
+
+call pathogen#infect()
+
+command! -nargs=1 -range SuperRetab <line1>,<line2>s/\v%(^ *)@<= {<args>}/\t/g
+
+"clang compiler integration for C++
+let g:clang_complete_auto = 0
+
+"IPython integration
+filetype plugin on
+let g:ipy_completefunc = 'local'
+command! IPy IPython --profile interactive_clean
+
+" allows files in ~/.vim/syntax to override system-level files
+syntax enable
+
+"to run vimsh (creates a bash shell in a new buffer)
+"displays all sorts of extra characters?
+"nmap <leader>sh :source $HOME/.vim/vimsh/vimsh.vim<CR>
+
+"change the window-local current directory to match the directory of the
+"current file
+autocmd BufEnter * silent! lcd %:p:h
+

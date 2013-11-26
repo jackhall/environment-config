@@ -1,0 +1,67 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific aliases and functions
+# stty stop undef # to unmap ctrl-s, need this for vim-ipython
+export EDITOR=vim
+export VISUAL=gvim
+
+export JPY=~/Code/j2/j.py
+. ~/Code/j2/j.sh
+
+function ipy {
+    if ! tmux has-session -t ipy ; then
+        tmux new-session -d -s ipy
+        tmux set-buffer $'ipython console --pylab --profile=interactive_clean\n'
+        tmux paste-buffer -t ipy
+    fi
+    tmux attach-session -t ipy
+}
+
+function chicken {
+    if ! tmux has-session -t csi ; then
+        tmux new-session -d -s csi
+        tmux set-buffer $'csi\n'
+        tmux paste-buffer -t csi
+    fi
+    tmux attach-session -t csi
+}
+
+function shell {
+    if ! tmux has-session -t bash ; then
+        tmux new-session -d -s bash
+    fi
+    tmux attach-session -t bash
+}
+
+function gitbranchname {
+    branch_name=$(git symbolic-ref -q HEAD)
+    branch_name=${branch_name##refs/heads/}
+    branch_name=${branch_name:-HEAD}
+    echo $branch_name
+}
+
+function gitmatch {
+    branch_name=$(gitbranchname)
+    echo "Merging" $branch_name "into" $1
+    if [ "$branch_name" != $1 ]; then
+       git checkout $1
+       git merge $branch_name
+       git push origin $1
+       git checkout $branch_name
+    else 
+        echo Already on that branch...
+    fi
+}
+
+function gitpush {
+    branch_name=$(gitbranchname)
+    git add -u
+    git commit -m $1
+    git push origin branch_name
+}
+
