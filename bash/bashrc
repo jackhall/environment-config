@@ -9,6 +9,10 @@ fi
 # stty stop undef # to unmap ctrl-s, need this for vim-ipython
 export EDITOR=vim
 export VISUAL=gvim
+alias grep='grep -n --color=auto'
+alias ls='ls --color=auto'
+eval $(dircolors -b)
+set -o vi
 
 export JPY=~/Code/j2/j.py
 . ~/Code/j2/j.sh
