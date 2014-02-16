@@ -17,6 +17,11 @@ set -o vi
 export JPY=~/Code/j2/j.py
 . ~/Code/j2/j.sh
 
+function newpass {
+    < /dev/urandom tr -dc A-Za-z0-9_ | head -c$1
+    echo ""
+}
+
 function ipy {
     if ! tmux has-session -t ipy ; then
         tmux new-session -d -s ipy
