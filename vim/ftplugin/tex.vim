@@ -1,4 +1,4 @@
-set textwidth=80
+set textwidth=77
 setlocal foldmethod=syntax
 
 nnoremap <buffer> <silent> <localleader>j :call Justify()<cr>
