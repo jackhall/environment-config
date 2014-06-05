@@ -24,7 +24,9 @@ then
 			echo Filesystem previously configured.
 		else
 			mkdir /storage
-			echo UUID=d5afa2fe-bc30-4a25-96f2-9dc54c965884 /storage		ext4	defaults	1 2 >> /etc/fstab
+			# echo UUID=d5afa2fe-bc30-4a25-96f2-9dc54c965884 /storage		ext4	defaults	1 2 >> /etc/fstab
+            echo UUID=b481582a-00b8-4598-9baa-b1ea1729ca07 /storage     ext4    defaults    1 2 >> /etc/fstab
+            # use awk or sed to configure TRIM for SSD on '/', '/boot', '/home', and 'swap'
 		fi
 	fi
 
