@@ -14,9 +14,6 @@ alias ls='ls --color=auto'
 eval $(dircolors -b)
 set -o vi
 
-export JPY=~/Code/j2/j.py
-. ~/Code/j2/j.sh
-
 function newpass {
     < /dev/urandom tr -dc A-Za-z0-9_ | head -c$1
     echo ""
