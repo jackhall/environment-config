@@ -26,7 +26,12 @@ then
 			mkdir /storage
 			# echo UUID=d5afa2fe-bc30-4a25-96f2-9dc54c965884 /storage		ext4	defaults	1 2 >> /etc/fstab
             echo UUID=b481582a-00b8-4598-9baa-b1ea1729ca07 /storage     ext4    defaults    1 2 >> /etc/fstab
-            # use awk or sed to configure TRIM for SSD on '/', '/boot', '/home', and 'swap'
+            # configure TRIM for SSD on '/', '/boot', and '/home'
+            sed -i '\:/\s: s/defaults/defaults,discard/' /etc/fstab
+            sed -i '\:/boot\s: s/defaults/defaults,discard/' /etc/fstab
+            sed -i '\:/home\s: s/defaults/defaults,discard/' /etc/fstab
+            # disables logging of read operations
+            sed -i 's/defaults/defaults,noatime/' /etc/fstab
 		fi
 	fi
 
