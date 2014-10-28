@@ -29,10 +29,11 @@ then
             sed -i '\:/\s: s/defaults/defaults,discard/' /etc/fstab
             sed -i '\:/boot\s: s/defaults/defaults,discard/' /etc/fstab
             sed -i '\:/home\s: s/defaults/defaults,discard/' /etc/fstab
-            # disables logging of read operations
-            sed -i 's/defaults/defaults,noatime/' /etc/fstab
 		fi
 	fi
+
+    echo Disabling log writes on filesystem mount...
+    sed -i 's/defaults/defaults,noatime/' /etc/fstab
 
 	echo restarting...
 	reboot #system needs to switch to newest kernel
@@ -97,18 +98,14 @@ then
 	echo Installing music software...
 	yum -q -y install denemo audacity
 
-	echo Installing and configuring coding tools...
+	echo Installing programming tools...
 	yum -q -y install vim git #general tools
-    ln -s /storage/environment-config/vim /home/jack/.vim
-    ln -s /storage/environment-config/ipython /home/jack/.config/.
-    ln -s /storage/environment-config/bashrc /home/jack/.bashrc
-    ln -s /storage/environment-config/inputrc /home/jack/.inputrc
-    ln -s /storage/environment-config/tmux.conf /home/jack/.tmux.conf
-    ln -s /storage/environment-config/csirc /home/jack/.csirc
 	yum -q -y install gcc gcc-c++ make cmake boost boost-devel gtest gtest-devel clang clang-analyzer nemiver #c++
 	yum -q -y install python-devel python-ipython numpy scipy python-matplotlib #python
     yum -q -y install chicken chicken-doc cairo cairo-devel SDL SDL-devel SDL_image SDL_image-devel SDL_gfx SDL_gfx-devel SDL_ttf SDL_ttf-devel SDL_net SDL_net-devel
     chicken-install mathh defstruct readline numbers sdl cairo doodle miscmacros parley simple-graphics
+
+    echo Beginning git configuration...
 	git config --global user.name "jackhall"
 	git config --global user.email "jackwhall7@gmail.com"
     runuser -l jack -c 'ssh-keygen -t rsa -C "jackwhall7@gmail.com"'
@@ -124,7 +121,17 @@ if [ "$1" -eq "third" ]
 	git clone git@github.com:jackhall/Alexander.git
 	git clone git@github.com:jackhall/Lyapunov.git
     git clone git@github.com:jackhall/Georg.git
+    git clone git@github.com:jackhall/environment-config
     chown -R jack /home/jack/Code
+
+    echo Linking config files...
+    cd /home/jack/Code/environment-config
+    ln -s vim /home/jack/.vim
+    ln -s ipython /home/jack/.config/.
+    ln -s bash/bashrc /home/jack/.bashrc
+    ln -s inputrc /home/jack/.inputrc
+    ln -s tmux.conf /home/jack/.tmux.conf
+    ln -s csirc /home/jack/.csirc
 
 	echo Done!
 	exit 0
