@@ -25,9 +25,8 @@ then
 		else
 			mkdir /storage
             echo UUID=b481582a-00b8-4598-9baa-b1ea1729ca07 /storage     ext4    defaults    1 2 >> /etc/fstab
-            # configure TRIM for SSD on '/', '/boot', and '/home'
+            # configure TRIM for SSD on '/' and '/home'
             sed -i '\:/\s: s/defaults/defaults,discard/' /etc/fstab
-            sed -i '\:/boot\s: s/defaults/defaults,discard/' /etc/fstab
             sed -i '\:/home\s: s/defaults/defaults,discard/' /etc/fstab
 		fi
 	fi
