@@ -20,13 +20,11 @@ function newpass {
 }
 
 function enable-ut {
-    sudo systemctl stop netctl-auto@wlo1.service
-    sudo netctl start wlo1-restricted.utexas.edu
+    sudo systemctl stop netctl-auto@wlo1.service && sudo netctl start wlo1-utexas.edu
 }
 
 function disable-ut {
-    sudo netctl stop wlo1-restricted.utexas.edu
-    sudo systemctl start netctl-auto@wlo1.service
+    sudo netctl stop wlo1-utexas.edu && sudo systemctl start netctl-auto@wlo1.service
 }
 
 function ipy {
