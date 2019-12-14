@@ -1,5 +1,5 @@
 # linux configuration files
 
-~/.config/fish
-~/.config/nvim
-~/.inputrc
+* ~/.config/fish
+* ~/.config/nvim
+* ~/.inputrc
