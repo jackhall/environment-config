@@ -1,0 +1,27 @@
+"*":
+  "autocomplete-plus":
+    confirmCompletion: "tab always, enter when suggestion explicitly selected"
+  "autocomplete-python":
+    useKite: false
+  core:
+    closeDeletedFileTabs: true
+    projectHome: "/home/jack/Repos"
+    telemetryConsent: "limited"
+  editor:
+    preferredLineLength: 100
+    showIndentGuide: true
+    showInvisibles: true
+    softWrapAtPreferredLineLength: true
+    tabLength: 4
+    tabType: "soft"
+  "exception-reporting":
+    userId: "97238d62-e17e-4b15-9706-f186698c1219"
+  "linter-flake8":
+    executablePath: "/home/jack/.miniconda3/bin/flake8"
+    projectConfigFile: [
+      ".flake8"
+    ]
+  "tree-view":
+    alwaysOpenExisting: true
+  welcome:
+    showOnStartup: false
