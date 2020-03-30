@@ -8,7 +8,7 @@ require atom
 require conda
 
 # atom extensions needed for basic use
-apm install file-icons vim-mode-plus 
+apm install file-icons vim-mode-plus linter
 apm install minimap minimap-find-and-replace minimap-git-diff minimap-selection
 
 # atom extensions needed for python dev
