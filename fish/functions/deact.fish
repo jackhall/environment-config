@@ -1,4 +1,0 @@
-function deact
-    deactivate
-end
-
