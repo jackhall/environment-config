@@ -1,5 +1,4 @@
 set number
-set relativenumber
 set ruler
 
 set tabstop=4
