@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+
+GIT_ROOT=$(git rev-parse --show-toplevel)
+PROJECT=$(basename $GIT_ROOT)
+
+if test -f $GIT_ROOT/conda_history.yaml; then
+    echo "updating conda history"
+    conda env export --name $PROJECT --from-history > conda_history.yaml
+    git add conda_history.yaml
+fi
+
+if test -f $GIT_ROOT/conda.yaml; then
+    echo "updating conda env YAML"
+    conda env export --name $PROJECT > conda.yaml
+    git add conda.yaml
+fi
